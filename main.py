@@ -1,32 +1,26 @@
 from random import choice
 
-print("\t\t\tWelcome to Rock paper sissor\t\t\t\n\n")
+print("Welcome to Rock Paper Scissors\n")
 
-user = str(input("Select one of the Following:\nRock[r]\npaper[p]\nSissor[s]\n"))
+user = input("Select one of the following:\nRock[r]\nPaper[p]\nScissors[s]\n").lower()
 computer = choice(['r', 'p', 's'])
 
-
-def playGame(user, computer):
-    
+def play_game(user, computer):
     if user == computer:
-        print("It\'s a Tie")
-
-    if is_win(user, computer):
-        return 1
-    
-    return 0
-
-def is_win(player, opponent):
-    if((player == "r" and opponent == "s") or (player == "s" and opponent == "p") or (player == "p" and opponent == "r")):
+        print("It's a tie")
+        return False
+    elif is_win(user, computer):
+        print("You win!")
         return True
     else:
+        print("You lost!")
         return False
-    
 
-game = playGame(user, computer)
-if game == 0:
-    print("you Win")
-    print(computer)
-else:
-    print("You Lost")
-    print(computer)
+def is_win(player, opponent):
+    winning_conditions = {'r': 's', 's': 'p', 'p': 'r'}
+    return winning_conditions[player] == opponent
+
+game = play_game(user, computer)
+if not game:
+    print("Computer chose", computer)
+
